@@ -8,14 +8,14 @@ plugins {
 
 
 
-def globalVersion = '0.0.0-alpha0'
+def globalVersion = '0.0.0-alpha1'
 
 def description = "Miscellaneous JNA utilities for Linux"
 
 def link = 'https://github.com/dvlopt/linux-common.java'
 
 
-group   = 'dvlopt'
+group   = 'io.dvlopt'
 version = globalVersion
 
 
