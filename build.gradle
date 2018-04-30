@@ -2,6 +2,27 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'com.github.johnrengelman.shadow' version '2.0.3'
+    id 'com.jfrog.bintray' version '1.7.3'
+}
+
+
+
+
+def globalVersion = '0.0.0-alpha0'
+
+def description = "Miscellaneous JNA utilities for Linux"
+
+def link = 'https://github.com/dvlopt/linux-common.java'
+
+
+group   = 'dvlopt'
+version = globalVersion
+
+
+
+
+repositories {
+    jcenter()
 }
 
 
@@ -14,8 +35,51 @@ dependencies {
 
 
 
-repositories {
-    jcenter()
+task sourcesJar( type:      Jar     ,
+                 dependsOn: classes ) {
+
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+
+
+
+task javadocJar( type:      Jar     ,
+                 dependsOn: javadoc ) {
+
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+
+
+
+def pomConfig = {
+
+    licenses {
+        license {
+            name 'The MIT License'
+            url  'https://mit-license.org/'
+        }
+    }
+
+
+    developers {
+        developer {
+            name            'Adam Helinski'
+            email           'helinski.adam@outlook.com'
+            organization    'Dvlopt'
+            organizationUrl 'https://github.com/dvlopt'
+        }
+    }
+
+
+    scm {
+        connection          'scm:git:git://github.com/dvlopt/linux-common.java.git'
+        developerConnection 'scm:git:ssh://github.com/dvlopt/linux-common.java.git'
+        url                 link
+    }
 }
 
 
@@ -24,7 +88,26 @@ repositories {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+
             from components.java
+
+            artifact sourcesJar
+            artifact javadocJar
+            
+            pom.withXml {
+                def root = asNode()
+
+                root.appendNode( 'name'         ,
+                                 'linux-common' )
+
+                root.appendNode( 'description' ,
+                                 description   )
+
+                root.appendNode( 'url' ,
+                                 link  )
+
+                root.children().last() + pomConfig
+            }
         }
     }
 }
@@ -32,5 +115,31 @@ publishing {
 
 
 
-group = "dvlopt"
-version = "0.0.0-alpha0"
+bintray {
+    user = project.hasProperty( 'bintrayUser' ) ? project.property( 'bintrayUser' )
+                                                : System.getenv( 'BINTRAY_USER' )
+    key  = project.hasProperty( 'bintrayKey' ) ? project.property( 'bintrayKey' ) 
+                                               : System.getenv( 'BINTRAY_KEY' )
+
+    publications = [ 'mavenJava' ]
+
+    pkg {
+        repo                  = 'maven'
+        name                  = 'linux-common'
+        desc                  = description
+        licenses              = ['MIT']
+        websiteUrl            = link
+        vcsUrl                = 'https://github.com/dvlopt/linux-common.java.git'
+        labels                = [ 'java', 'jna', 'native', 'linux', 'tools' ]
+        publicDownloadNumbers = true
+        
+        version {
+            name   = globalVersion
+            vcsTag = globalVersion
+
+            gpg {
+                sign = true
+            }
+        }
+    }
+}
