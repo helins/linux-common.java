@@ -1,5 +1,9 @@
 # linux-common
 
+ [
+ ![Download](https://api.bintray.com/packages/dvlopt/maven/linux-common/images/download.svg)
+ ](https://bintray.com/dvlopt/maven/linux-common/_latestVersion)
+
 This java library aims to provide generic tooling for interfacing with linux
 utilities via [Java Native Access](https://github.com/java-native-access/jna).
 It is meant to build more specific libraries. New classes and functionalities
