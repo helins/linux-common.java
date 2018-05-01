@@ -8,11 +8,13 @@ plugins {
 
 
 
+def globalName    = 'linux-common'
+
 def globalVersion = '0.0.0-alpha2'
 
-def description = "Miscellaneous JNA utilities for Linux"
+def globalDesc    = "Miscellaneous JNA utilities for Linux"
 
-def link = 'https://github.com/dvlopt/linux-common.java'
+def globalUrl     = 'https://github.com/dvlopt/linux-common.java'
 
 
 group   = 'io.dvlopt'
@@ -78,7 +80,7 @@ def pomConfig = {
     scm {
         connection          'scm:git:git://github.com/dvlopt/linux-common.java.git'
         developerConnection 'scm:git:ssh://github.com/dvlopt/linux-common.java.git'
-        url                 link
+        url                 globalUrl
     }
 }
 
@@ -97,14 +99,14 @@ publishing {
             pom.withXml {
                 def root = asNode()
 
-                root.appendNode( 'name'         ,
-                                 'linux-common' )
+                root.appendNode( 'name'     ,
+                                 globalName )
 
                 root.appendNode( 'description' ,
-                                 description   )
+                                 globalDesc    )
 
-                root.appendNode( 'url' ,
-                                 link  )
+                root.appendNode( 'url'     ,
+                                 globalUrl )
 
                 root.children().last() + pomConfig
             }
@@ -125,10 +127,10 @@ bintray {
 
     pkg {
         repo                  = 'maven'
-        name                  = 'linux-common'
-        desc                  = description
-        licenses              = ['MIT']
-        websiteUrl            = link
+        name                  = globalName
+        desc                  = globalDesc
+        licenses              = [ 'MIT' ]
+        websiteUrl            = globalUrl
         vcsUrl                = 'https://github.com/dvlopt/linux-common.java.git'
         labels                = [ 'java', 'jna', 'native', 'linux', 'tools' ]
         publicDownloadNumbers = true
