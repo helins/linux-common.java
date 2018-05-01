@@ -20,10 +20,25 @@ public class Linux {
      * Get the value of <code>errno</code>, a global int often set by native functions when
      * a failure occurs.
      *
-     * @return the current value of errno.
+     * @return  The current value of errno.
      */
-    public static int errno() {
+    public static int getErrno() {
     
         return Native.getLastError() ;
+    }
+
+
+
+
+    /**
+     * Set the value of <code>errno</code>.
+     *
+     * @param value The new value of errno.
+     *
+     * @see getErrno
+     */
+    public static void setErrno( int value ) {
+
+        Native.setLastError( value ) ;
     }
 }

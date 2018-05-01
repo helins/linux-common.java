@@ -8,7 +8,7 @@ plugins {
 
 
 
-def globalVersion = '0.0.0-alpha1'
+def globalVersion = '0.0.0-alpha2'
 
 def description = "Miscellaneous JNA utilities for Linux"
 
