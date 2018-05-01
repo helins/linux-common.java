@@ -9,7 +9,12 @@ utilities via [Java Native Access](https://github.com/java-native-access/jna).
 It is meant to build more specific libraries. New classes and functionalities
 will be added as specific libraries uncover general patterns and needs.
 
-# License
+## Usage
+
+Simply read the
+[javadoc](https://dvlopt.github.io/doc/java/linux-common/io/dvlopt/linux/package-summary.html).
+
+## License
 
 MIT License
 
