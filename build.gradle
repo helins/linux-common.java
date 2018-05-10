@@ -70,9 +70,9 @@ def pomConfig = {
     developers {
         developer {
             name            'Adam Helinski'
-            email           'helinski.adam@outlook.com'
+            email           'adam@dvlopt.io'
             organization    'Dvlopt'
-            organizationUrl 'https://github.com/dvlopt'
+            organizationUrl 'http://dvlopt.io'
         }
     }
 
