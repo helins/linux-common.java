@@ -10,7 +10,7 @@ plugins {
 
 def globalName    = 'linux-common'
 
-def globalVersion = '0.0.0'
+def globalVersion = '0.0.1'
 
 def globalDesc    = "Miscellaneous JNA utilities for Linux"
 
@@ -144,4 +144,10 @@ bintray {
             }
         }
     }
+}
+
+
+if ( JavaVersion.current() != JavaVersion.VERSION_1_8 ) {
+
+    throw new GradleException( "Must be used with Java 8 only")
 }
