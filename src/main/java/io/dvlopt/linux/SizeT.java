@@ -8,7 +8,7 @@ import com.sun.jna.Native      ;
 
 
 /**
- * Class representing the native <code>size_t</code> which is architecture-specific.
+ * Class representing the native <code>size_t</code> type which is architecture-specific.
  * <p>
  * It is an unsigned integer typically representing the length of something.
  */

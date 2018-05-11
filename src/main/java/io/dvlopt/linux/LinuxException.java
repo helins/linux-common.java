@@ -44,7 +44,9 @@ public class LinuxException extends Exception {
 
 
     /**
-     * @return the value of errno when the exception was created.
+     * Retrieves the value of errno when the error occured.
+     *
+     * @return  The value of errno.
      */
     public int getErrno() {
 

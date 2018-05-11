@@ -147,6 +147,16 @@ bintray {
 }
 
 
+
+
+javadoc {
+    options.links( 'https://docs.oracle.com/javase/8/docs/api/'             ,
+                   'http://java-native-access.github.io/jna/4.5.1/javadoc/' )
+}
+
+
+
+
 if ( JavaVersion.current() != JavaVersion.VERSION_1_8 ) {
 
     throw new GradleException( "Must be used with Java 8 only")
