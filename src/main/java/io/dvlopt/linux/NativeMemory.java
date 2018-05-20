@@ -34,9 +34,14 @@ public class NativeMemory {
 
 
 
-    private static native void memcpy( Pointer ptr1 ,
-                                       Pointer ptr2 ,
-                                       SizeT   n    ) ;
+    private static native int memcmp( Pointer ptr1 ,
+                                      Pointer ptr2 ,
+                                      SizeT   n    ) ;
+
+
+    private static native void memcpy( Pointer ptrOrigin ,
+                                       Pointer ptrTarget ,
+                                       SizeT   n         ) ;
 
 
     private static native void memset( Pointer ptr ,
@@ -46,24 +51,67 @@ public class NativeMemory {
 
 
 
-    public static void copy( Pointer ptr1 ,
-                             Pointer ptr2 ,
-                             SizeT   n     ) {
+    public static void copy( Pointer ptrOrigin ,
+                             Pointer ptrTarget ,
+                             SizeT   n         ) {
     
-        memcpy( ptr1 ,
-                ptr2 ,
-                n    ) ;
+        memcpy( ptrOrigin ,
+                ptrTarget ,
+                n         ) ;
     }
 
 
 
 
-    public static void copy( Memory  ptr1 ,
-                             Pointer ptr2 ) {
+    public static void copy( Memory  ptrOrigin ,
+                             Pointer ptrTarget ) {
     
-        memcpy( ptr1                     ,
-                ptr2                     ,
-                new SizeT( ptr1.size() ) ) ;
+        memcpy( ptrOrigin                     ,
+                ptrTarget                     ,
+                new SizeT( ptrOrigin.size() ) ) ;
+    }
+
+
+
+
+    public static boolean equal( Pointer ptr1 ,
+                                 Pointer ptr2 ,
+                                 SizeT   n    ) {
+    
+        return memcmp( ptr1 ,
+                       ptr2 ,
+                       n    ) == 0 ;
+    }
+
+
+
+
+    public static boolean equal( Memory  ptr1 ,
+                                 Pointer ptr2 ) {
+    
+        return equal( ptr1                     ,
+                      ptr2                     ,
+                      new SizeT( ptr1.size() ) ) ;
+    }
+
+
+
+    public static boolean equal( Pointer ptr1 ,
+                                 Memory  ptr2 ) {
+    
+        return equal( ptr1                     ,
+                      ptr2                     ,
+                      new SizeT( ptr2.size() ) ) ;
+    }
+
+
+
+
+    public static boolean equal( Memory ptr1 ,
+                                 Memory ptr2 ) {
+    
+        return equal( ptr1          ,
+                      (Pointer)ptr2 ) ;
     }
 
 
@@ -77,6 +125,18 @@ public class NativeMemory {
                 b   ,
                 n   ) ;
     }
+
+
+
+
+    public static void fill( Memory ptr ,
+                             int    b   ) {
+    
+        fill( ptr                     ,
+              b                       ,
+              new SizeT( ptr.size() ) ) ;
+    }
+
 
 
 
@@ -126,7 +186,7 @@ public class NativeMemory {
                                        long    offset ) {
     
         return   ptr.getInt( offset )
-               & 0xffffffL            ; 
+               & 0xffffffffL          ; 
     }
 
 

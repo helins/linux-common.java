@@ -31,7 +31,24 @@ repositories {
 
 
 dependencies {
-    api 'net.java.dev.jna:jna:4.5.1'
+    api         'net.java.dev.jna:jna:4.5.1'
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+}
+
+
+
+
+test {
+
+    useJUnitPlatform()
+
+    testLogging {
+
+        events 'passed'  ,
+               'skipped' ,
+               'failed'
+    }
 }
 
 
