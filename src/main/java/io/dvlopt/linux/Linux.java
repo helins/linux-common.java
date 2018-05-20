@@ -22,12 +22,15 @@ import com.sun.jna.Native ;
 
 
 
+
 /**
  * Class containing static methods related to Linux.
  */
 public class Linux {
 
 
+    // Privatize constructor.
+    //
     private Linux() {}
 
 
