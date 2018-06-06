@@ -24,6 +24,11 @@ import com.sun.jna.Pointer   ;
 import io.dvlopt.linux.SizeT ;
 
 
+
+
+/**
+ * Class providing static methods for doing operations on JNA pointers and managed memory.
+ */
 public class NativeMemory {
 
 
@@ -51,6 +56,22 @@ public class NativeMemory {
 
 
 
+    // Privatizes constructor.
+    //
+    private NativeMemory() {} ;
+
+
+
+
+    /**
+     * Copies `<strong>n</strong>` bytes from a pointer to another.
+     *
+     * @param ptrOrigin  Pointer holding to bytes to copy.
+     *
+     * @param ptrTarget  Pointer where the bytes will be copied.
+     *
+     * @param n  How many bytes will be copied.
+     */
     public static void copy( Pointer ptrOrigin ,
                              Pointer ptrTarget ,
                              SizeT   n         ) {
@@ -63,6 +84,13 @@ public class NativeMemory {
 
 
 
+    /**
+     * Copies all the bytes of a managed pointer to another one.
+     *
+     * @param ptrOrigin  Managed pointer whose bytes will be copied.
+     *
+     * @param ptrTarget  Pointer where the bytes will be copied.
+     */
     public static void copy( Memory  ptrOrigin ,
                              Pointer ptrTarget ) {
     
@@ -74,6 +102,17 @@ public class NativeMemory {
 
 
 
+    /**
+     * Tests two pointers for equality, byte per byte.
+     *
+     * @param ptr1  First pointer.
+     *
+     * @param ptr2  Second pointer.
+     *
+     * @param n  How many bytes will be tested.
+     *
+     * @return  True if all tested bytes are equal.
+     */
     public static boolean equal( Pointer ptr1 ,
                                  Pointer ptr2 ,
                                  SizeT   n    ) {
@@ -86,6 +125,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Tests a managed pointer against a regular one for equality.
+     *
+     * @param ptr1  Managed pointer.
+     *
+     * @param ptr2  Regular pointer.
+     *
+     * @return  True if all tested bytes are equal.
+     */
     public static boolean equal( Memory  ptr1 ,
                                  Pointer ptr2 ) {
     
@@ -96,6 +144,16 @@ public class NativeMemory {
 
 
 
+
+    /**
+     * Tests a regular pointer against a managed one for equality.
+     *
+     * @param ptr1  Regular pointer.
+     *
+     * @param ptr2  Managed pointer.
+     *
+     * @return  True if all tested bytes are equal.
+     */
     public static boolean equal( Pointer ptr1 ,
                                  Memory  ptr2 ) {
     
@@ -107,6 +165,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Tests two managed pointers for equality.
+     *
+     * @param ptr1  First managed pointer.
+     *
+     * @param ptr2  Second managed pointer.
+     *
+     * @return  True if all tested bytes are equal.
+     */
     public static boolean equal( Memory ptr1 ,
                                  Memory ptr2 ) {
     
@@ -117,6 +184,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Given a pointer, sets `<strong>n</strong>` bytes to value `<strong>b</strong>`.
+     *
+     * @param ptr  Pointer acting as a starting point.
+     *
+     * @param b  Unsigned byte.
+     *
+     * @param n  How many bytes.
+     */
     public static void fill( Pointer ptr ,
                              int     b   ,
                              SizeT   n   ) {
@@ -129,6 +205,13 @@ public class NativeMemory {
 
 
 
+    /**
+     * Given a managed pointer, sets all bytes to value `<strong>b</strong>`.
+     *
+     * @param ptr  Managed pointer.
+     *
+     * @param b  Unsigned byte.
+     */
     public static void fill( Memory ptr ,
                              int    b   ) {
     
@@ -140,6 +223,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Given a pointer, reads an unsigned byte value.
+     *
+     * @param ptr  Pointer.
+     *
+     * @param offset  Byte offset from the pointer.
+     *
+     * @return  Unsigned byte.
+     */
     public static int getUnsignedByte( Pointer ptr    ,
                                        long    offset ) {
     
@@ -150,6 +242,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Given a pointer, writes an unsigned byte value.
+     *
+     * @param ptr  Pointer.
+     *
+     * @param offset  Byte offset from the pointer.
+     *
+     * @param b  Unsigned byte.
+     */
     public static void setUnsignedByte( Pointer ptr    ,
                                         long    offset ,
                                         int     b      ) {
@@ -161,6 +262,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Given a pointer, reads an unsigned short value.
+     *
+     * @param ptr  Pointer.
+     *
+     * @param offset  Byte offset from the pointer.
+     *
+     * @return  Unsigned short.
+     */
     public static int getUnsignedShort( Pointer ptr    ,
                                         long    offset ) {
     
@@ -171,6 +281,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Given a pointer, writes an unsigned short value.
+     *
+     * @param ptr  Pointer.
+     *
+     * @param offset  Byte offset from the pointer.
+     *
+     * @param s  Unsigned short.
+     */
     public static void setUnsignedShort( Pointer ptr    ,
                                          long    offset ,
                                          int     s      ) {
@@ -182,6 +301,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Given a pointer, reads an unsigned int value.
+     *
+     * @param ptr  Pointer.
+     *
+     * @param offset  Byte offset from the pointer.
+     *
+     * @return  Unsigned int.
+     */
     public static long getUnsignedInt( Pointer ptr    ,
                                        long    offset ) {
     
@@ -192,6 +320,15 @@ public class NativeMemory {
 
 
 
+    /**
+     * Given a pointer, writes an unsigned int value.
+     *
+     * @param ptr  Pointer.
+     *
+     * @param offset  Byte offset from the pointer.
+     *
+     * @param i Unsigned int.
+     */
     public static void setUnsignedInt( Pointer ptr    ,
                                        long    offset ,
                                        long    i      ) {
