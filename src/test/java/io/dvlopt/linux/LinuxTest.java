@@ -39,8 +39,9 @@ public class LinuxTest {
 
             Linux.setErrno( value ) ;
 
-            assertEquals( Linux.getErrno() ,
-                          value            ) ;
+            assertEquals( Linux.getErrno()                 ,
+                          value                            ,
+                          "Errno should be set correctly." ) ;
         }
     }
 }

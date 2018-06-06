@@ -46,13 +46,15 @@ public class NativeMemoryTest {
                       (byte)43    ) ;
 
         assertFalse( NativeMemory.equal( mem1 ,
-                                         mem2 ) ) ;
+                                         mem2 )                       ,
+                     "Two pointers are different by at least 1 byte." ) ;
 
         NativeMemory.copy( mem1 ,
                            mem2 ) ;
 
         assertTrue( NativeMemory.equal( mem1 ,
-                                        mem2 ) ) ;
+                                        mem2 )         ,
+                    "Copied pointers should be equal." ) ;
     }
 
 
@@ -69,7 +71,8 @@ public class NativeMemoryTest {
                            mem2 ) ;
 
         assertTrue( NativeMemory.equal( mem1 ,
-                                        mem2 ) ) ;
+                                        mem2 )                            ,
+                    "Copying is successful if copied pointer are equald." ) ;
     }
 
 
@@ -93,7 +96,7 @@ public class NativeMemoryTest {
             if ( NativeMemory.getUnsignedByte( mem ,
                                                i   ) != b ) {
 
-                fail() ;            
+                fail( "Unsigned byte value differs from what has been filled." ) ;            
             }
         }
     }
@@ -113,9 +116,10 @@ public class NativeMemoryTest {
                                       0     ,
                                       ubyte ) ;
 
-        assertEquals( NativeMemory.getUnsignedByte( mem ,
-                                                    0   ) ,
-                      ubyte                               ) ;
+        assertEquals( ubyte                                                 ,
+                      NativeMemory.getUnsignedByte( mem ,
+                                                    0   )                   ,
+                      "Unsigned byte value differs from what has been set." ) ;
 
         int ushort = Short.MAX_VALUE + 1 ;
 
@@ -123,9 +127,10 @@ public class NativeMemoryTest {
                                        0      ,
                                        ushort ) ;
 
-        assertEquals( NativeMemory.getUnsignedShort( mem ,
-                                                     0   ) ,
-                      ushort                               ) ;
+        assertEquals( ushort                                                 ,
+                      NativeMemory.getUnsignedShort( mem ,
+                                                     0   )                   ,
+                      "Unsigned short value differs from what has been set." ) ;
 
         long uint = Integer.MAX_VALUE + 1L ;
 
@@ -133,8 +138,9 @@ public class NativeMemoryTest {
                                      0    ,
                                      uint ) ;
 
-        assertEquals( NativeMemory.getUnsignedInt( mem ,
-                                                   0   ) ,
-                      uint                               ) ;
+        assertEquals( uint                                                 ,
+                      NativeMemory.getUnsignedInt( mem ,
+                                                   0   )                   ,
+                      "Unsigned int value differs from what has been set." ) ;
     }
 }
