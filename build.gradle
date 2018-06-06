@@ -10,7 +10,7 @@ plugins {
 
 def globalName    = 'linux-common'
 
-def globalVersion = '0.1.0'
+def globalVersion = '0.1.1'
 
 def globalDesc    = "Miscellaneous JNA utilities for Linux"
 

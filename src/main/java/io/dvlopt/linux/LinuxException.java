@@ -39,10 +39,12 @@ public class LinuxException extends Exception {
      */
     public LinuxException() {
     
-        super() ;
+        super( messagePrefix() ) ;
 
         this.errno = Native.getLastError() ;
     }
+
+
 
 
     /**
@@ -51,10 +53,20 @@ public class LinuxException extends Exception {
      * @param message  String describing what happened.
      */
     public LinuxException( String message ) {
-    
-        super( message ) ;
+
+        super( messagePrefix() + " : " + message ) ;
 
         this.errno = Native.getLastError() ;
+    }
+
+
+
+
+    // Makes a prefix stating the current value of errno for the exception message.
+    //
+    private static String messagePrefix() {
+
+        return "Errno " + Native.getLastError() ;
     }
 
 
