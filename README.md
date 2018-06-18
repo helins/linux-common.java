@@ -15,7 +15,7 @@ will be added as specific libraries uncover general patterns and needs.
 ## Usage
 
 Simply read the
-[javadoc](https://dvlopt.github.io/doc/java/linux-common/io/dvlopt/linux/package-summary.html).
+[javadoc](https://dvlopt.github.io/doc/java/io.dvlopt/linux-common/io/dvlopt/linux/package-summary.html).
 
 ## License
 
