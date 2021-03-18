@@ -19,7 +19,6 @@ Simply read the
 
 ## License
 
-Licensed under the [Apache License, Version
-2.0](http://www.apache.org/licenses/LICENSE-2.0).
-
 Copyright © 2018 Adam Helinski
+
+Licensed under the term of the Mozilla Public License 2.0, see LICENSE.

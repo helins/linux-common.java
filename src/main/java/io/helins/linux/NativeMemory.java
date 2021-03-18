@@ -15,13 +15,13 @@
  */
 
 
-package io.dvlopt.linux ;
+package io.helins.linux ;
 
 
 import com.sun.jna.Memory    ;
 import com.sun.jna.Native    ;
 import com.sun.jna.Pointer   ;
-import io.dvlopt.linux.SizeT ;
+import io.helins.linux.SizeT ;
 
 
 

@@ -15,7 +15,7 @@
  */
 
 
-package io.dvlopt.linux ;
+package io.helins.linux ;
 
 
 import com.sun.jna.Native ;

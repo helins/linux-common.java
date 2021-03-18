@@ -21,4 +21,4 @@
  *
  * @see <a href=https://github.com/java-native-access/jna>Java Native Access</a>
  */
-package io.dvlopt.linux ;
+package io.helins.linux ;

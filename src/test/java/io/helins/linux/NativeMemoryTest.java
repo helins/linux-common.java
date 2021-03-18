@@ -15,7 +15,7 @@
  */
 
 
-package io.dvlopt.linux.gpio ;
+package io.helins.linux ;
 
 
 import static org.junit.jupiter.api.Assertions.* ;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.* ;
 import com.sun.jna.Memory                ;
 import org.junit.jupiter.api.DisplayName ;
 import org.junit.jupiter.api.Test        ;
-import io.dvlopt.linux.NativeMemory      ;
+import io.helins.linux.NativeMemory      ;
 
 
 

@@ -15,7 +15,7 @@
  */
 
 
-package io.dvlopt.linux.gpio ;
+package io.helins.linux ;
 
 
 import static org.junit.jupiter.api.Assertions.* ;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.* ;
 
 import org.junit.jupiter.api.DisplayName ;
 import org.junit.jupiter.api.Test        ;
-import io.dvlopt.linux.Linux             ;
+import io.helins.linux.Linux             ;
 
 
 

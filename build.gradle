@@ -1,41 +1,53 @@
 plugins {
-    id 'java-library'
-    id 'maven-publish'
-    id 'com.github.johnrengelman.shadow' version '2.0.3'
-    id 'com.jfrog.bintray' version '1.7.3'
+    id "java-library"
+    id "maven-publish"
+    id "signing"
 }
 
 
 
 
-def globalName    = 'linux-common'
+def globalName    = "linux-common"
 
-def globalVersion = '0.1.1'
+def globalVersion = "0.1.1"
 
 def globalDesc    = "Miscellaneous JNA utilities for Linux"
 
-def globalUrl     = 'https://github.com/dvlopt/linux-common.java'
+def globalUrl     = "https://github.com/helins/linux-common.java"
 
 
-group   = 'io.dvlopt'
+
+
+group   = "io.helins"
 version = globalVersion
 
 
 
-
 repositories {
-    jcenter()
+    mavenCentral()
 }
-
 
 
 
 dependencies {
-    api         'net.java.dev.jna:jna:4.5.1'
-    testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
-    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
+    api                "net.java.dev.jna:jna:5.7.0"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.1"
+    testRuntimeOnly    "org.junit.jupiter:junit-jupiter-engine:5.7.1"
 }
 
+
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+
+
+javadoc {
+    options.links( "https://docs.oracle.com/javase/8/docs/api/"             ,
+                   "http://java-native-access.github.io/jna/4.5.1/javadoc/" )
+}
 
 
 
@@ -45,88 +57,66 @@ test {
 
     testLogging {
 
-        events 'passed'  ,
-               'skipped' ,
-               'failed'
+        events "passed"  ,
+               "skipped" ,
+               "failed"
     }
 }
 
 
 
 
-task sourcesJar( type:      Jar     ,
-                 dependsOn: classes ) {
-
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-
-
-
-task javadocJar( type:      Jar     ,
-                 dependsOn: javadoc ) {
-
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-
-
-
-def pomConfig = {
-
-    licenses {
-        license {
-            name 'Apache License, Version 2.0'
-            url  'http://www.apache.org/licenses/LICENSE-2.0'
-        }
-    }
-
-
-    developers {
-        developer {
-            name            'Adam Helinski'
-            email           'adam@dvlopt.io'
-            organization    'Dvlopt'
-            organizationUrl 'http://dvlopt.io'
-        }
-    }
-
-
-    scm {
-        connection          'scm:git:git://github.com/dvlopt/linux-common.java.git'
-        developerConnection 'scm:git:ssh://github.com/dvlopt/linux-common.java.git'
-        url                 globalUrl
-    }
-}
-
-
+// Publishing to Maven
 
 
 publishing {
+
+
     publications {
-        mavenJava(MavenPublication) {
+        LibMaven( MavenPublication ) {
 
             from components.java
 
-            artifact sourcesJar
-            artifact javadocJar
+
+            pom {
+
+
+                name        = globalName
+                description = globalDesc
+                url         = globalUrl
+
+                licenses {
+                     license {
+                         name = "Mozilla Public License Version 2.0"
+                         url  = "https://www.mozilla.org/en-US/MPL/2.0/"
+                     }
+                }
+
+
+                developers {
+                    developer {
+                        name            = "Adam Helinski"
+                        email           = "adam@helins.io"
+                        organizationUrl = "http://www.helins.io"
+                    }
+                }
             
-            pom.withXml {
-                def root = asNode()
-
-                root.appendNode( 'name'     ,
-                                 globalName )
-
-                root.appendNode( 'description' ,
-                                 globalDesc    )
-
-                root.appendNode( 'url'     ,
-                                 globalUrl )
-
-                root.children().last() + pomConfig
+            
+                scm {
+                    connection          = "scm:git:git://github.com/helins/linux-common.java.git"
+                    developerConnection = "scm:git:ssh://github.com/helins/linux-common.java.git"
+                    url                 = globalUrl
+                }
             }
+        }
+    }
+
+
+    repositories {
+        maven {
+            credentials( PasswordCredentials )
+            name = "sonatype"
+            url  = "https://s01.oss.sonatype.org"
         }
     }
 }
@@ -134,47 +124,6 @@ publishing {
 
 
 
-bintray {
-    user = project.hasProperty( 'bintrayUser' ) ? project.property( 'bintrayUser' )
-                                                : System.getenv( 'BINTRAY_USER' )
-    key  = project.hasProperty( 'bintrayKey' ) ? project.property( 'bintrayKey' ) 
-                                               : System.getenv( 'BINTRAY_KEY' )
-
-    publications = [ 'mavenJava' ]
-
-    pkg {
-        repo                  = 'maven'
-        name                  = globalName
-        desc                  = globalDesc
-        licenses              = [ 'Apache-2.0' ]
-        websiteUrl            = globalUrl
-        vcsUrl                = 'https://github.com/dvlopt/linux-common.java.git'
-        labels                = [ 'java', 'jna', 'native', 'linux', 'tools' ]
-        publicDownloadNumbers = true
-        
-        version {
-            name   = globalVersion
-            vcsTag = globalVersion
-
-            gpg {
-                sign = true
-            }
-        }
-    }
-}
-
-
-
-
-javadoc {
-    options.links( 'https://docs.oracle.com/javase/8/docs/api/'             ,
-                   'http://java-native-access.github.io/jna/4.5.1/javadoc/' )
-}
-
-
-
-
-if ( JavaVersion.current() != JavaVersion.VERSION_1_8 ) {
-
-    throw new GradleException( "Must be used with Java 8 only")
+signing {
+    sign publishing.publications.LibMaven
 }
