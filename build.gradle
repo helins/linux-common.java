@@ -9,7 +9,7 @@ plugins {
 
 def globalName    = "linux-common"
 
-def globalVersion = "0.1.2"
+def globalVersion = "0.1.3"
 
 def globalDesc    = "Miscellaneous JNA utilities for Linux"
 
@@ -43,11 +43,15 @@ java {
 }
 
 
+
+
 tasks.jar {
     manifest {
         attributes("Automatic-Module-Name": "io.helins.linux")
     }
 }
+
+
 
 
 javadoc {
