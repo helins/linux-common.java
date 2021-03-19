@@ -1,4 +1,4 @@
-# linux-common
+# Linux-Common
 
 [![Maven
 Central](https://maven-badges.herokuapp.com/maven-central/io.helins/linux-common/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.helins/linux-common)
@@ -17,6 +17,7 @@ It serves as a foundations for more useful libraries such as:
 - [io.helins/linux-epoll](https://github.com/helins/linux-epoll.java), using Linux's Epoll
 - [io.helins/linux-i2c](https://github.com/helins/linux-i2c.java), using the I2C protocol
 - [io.helins/linux-gpio](https://github.com/helins/linux-gpio.java), using the Linux GPIO utilities
+
 
 ## Usage
 
