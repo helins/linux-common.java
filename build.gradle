@@ -9,7 +9,7 @@ plugins {
 
 def globalName    = "linux-common"
 
-def globalVersion = "0.1.1"
+def globalVersion = "0.1.2"
 
 def globalDesc    = "Miscellaneous JNA utilities for Linux"
 
@@ -43,9 +43,15 @@ java {
 }
 
 
+tasks.jar {
+    manifest {
+        attributes("Automatic-Module-Name": "io.helins.linux")
+    }
+}
+
 
 javadoc {
-    options.links( "https://docs.oracle.com/javase/8/docs/api/"             ,
+    options.links( "https://docs.oracle.com/en/java/javase/11/docs/api/"    ,
                    "http://java-native-access.github.io/jna/4.5.1/javadoc/" )
 }
 
@@ -116,7 +122,7 @@ publishing {
         maven {
             credentials( PasswordCredentials )
             name = "sonatype"
-            url  = "https://s01.oss.sonatype.org"
+            url  = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
         }
     }
 }
