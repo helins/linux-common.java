@@ -24,7 +24,7 @@ public class NativeMemory {
 
     static {
     
-        Native.register( "c" ) ;
+        Native.register( NativeMemory.class, "c" ) ;
     }
 
 
